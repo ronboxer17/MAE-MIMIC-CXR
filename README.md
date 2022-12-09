@@ -1,1 +1,0 @@
-# MAE-MIMIC-CXR
