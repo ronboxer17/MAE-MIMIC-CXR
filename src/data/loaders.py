@@ -3,12 +3,7 @@ import os
 from typing import Dict, List
 
 import pandas as pd
-from src.utils import ROOT_DIR
-
-METADATA_PATH = os.path.join(ROOT_DIR, 'data/mimic-cxr/mimic-cxr-2.0.0-metadata.csv')
-SPLIT_PATH = os.path.join(ROOT_DIR, 'data/mimic-cxr/mimic-cxr-2.0.0-split.csv')
-CHEXPERT_PATH = os.path.join(ROOT_DIR, 'data/chexpert/mimic-cxr-2.0.0-chexpert.csv')
-NEGIBOX_PATH = os.path.join(ROOT_DIR, 'data/negibox/mimic-cxr-2.0.0-negibox.csv')
+from src.config import ROOT_DIR, METADATA_PATH, SPLIT_PATH, CHEXPERT_PATH, NEGIBOX_PATH
 
 
 def _create_id_path_dict() -> Dict[str, str]:
@@ -26,4 +21,3 @@ def _create_list_of_all_paths_jpg_files(path: str) -> List[str]:
     return [j.replace('\\', '/') for j in all_jpgs]
 
 
-print(_create_id_path_dict())
