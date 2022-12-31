@@ -25,7 +25,7 @@ def _create_list_of_all_paths_jpg_files(path: str) -> List[str]:
 def create_data_folder_for_model(ids_paths: Dict[str, str], type=None) -> None:
     assert type in ('train', 'val', 'test'), f'{type} not one of [train, val, test]'
 
-    folder_path = os.path.join(ROOT_DIR, 'data/for_model', type) # TODO: change the folder_path according to our needs
+    folder_path = os.path.join(ROOT_DIR, 'data', type) # TODO: change the folder_path according to our needs
     os.makedirs(folder_path, exist_ok=True)
     for id, source_path in ids_paths.items():
         shutil.copy(
