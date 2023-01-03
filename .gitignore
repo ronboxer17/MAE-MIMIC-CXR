@@ -1,4 +1,7 @@
 /data/mimic-cxr/files
+/data/train
+/data/val
+/data/test
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

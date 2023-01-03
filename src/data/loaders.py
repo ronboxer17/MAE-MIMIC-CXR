@@ -22,19 +22,27 @@ def _create_list_of_all_paths_jpg_files(path: str) -> List[str]:
     return [j.replace('\\', '/') for j in all_jpgs]
 
 
-def create_data_folder_for_model(ids_paths: Dict[str, str], type=None) -> None:
+def create_data_folder_for_model(ids: List[str], type=None, label=None) -> None:
     assert type in ('train', 'val', 'test'), f'{type} not one of [train, val, test]'
 
-    folder_path = os.path.join(ROOT_DIR, 'data', type) # TODO: change the folder_path according to our needs
+    ids_paths = {k: v for k, v in _create_id_path_dict().items() if k in ids}
+
+    if type == 'test':
+        folder_path = os.path.join(ROOT_DIR, 'data', type)  # TODO: change the folder_path according to our needs
+    else:
+        folder_path = os.path.join(ROOT_DIR, 'data', type, label)
+
     os.makedirs(folder_path, exist_ok=True)
     for id, source_path in ids_paths.items():
-        shutil.copy(
-            source_path,
-            os.path.join(folder_path, os.path.basename(source_path))
-        )
+        output_path = os.path.join(folder_path, os.path.basename(source_path))
+        if not os.path.isfile(output_path):
+            shutil.copy(
+                source_path,
+                output_path
+            )
 
 
 if __name__ == '__main__':
     d = _create_id_path_dict()
-    print(d)
-    create_data_folder_for_model(d, 'train')
+    print(d.keys())
+    create_data_folder_for_model(['02aa804e-bde0afdd-112c0b34-7bc16630-4e384014'], type='train', label=str(1))
